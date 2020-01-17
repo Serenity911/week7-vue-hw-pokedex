@@ -1,11 +1,13 @@
 <template lang="html">
   <div>
     <pokemon-list :pokemonNameUrl='pokemonNameUrl' :parentSelectedPkmnName='selectedPkmnName'/>
+    <pokemon-detail v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
   </div>
 </template>
 
 <script>
 import PokemonList from './components/PokemonList.vue'
+import PokemonDetail from './components/PokemonDetail.vue'
 import { eventBus } from './main.js'
 
 export default {
@@ -13,7 +15,8 @@ export default {
   data() {
     return {
       pokemonNameUrl: [],
-      selectedPkmnName: 'bulbasaur'
+      selectedPkmnName: 'bulbasaur',
+      selectedPkmn: null
     }
   },
   mounted() {
@@ -26,12 +29,22 @@ export default {
       .then(result => result.json())
       .then(result => this.pokemonNameUrl = result.results )
     },
+    findPokemon(name) {
+      return this.selectedPkmn = this.pokemonNameUrl.find(pokemon => pokemon.name === name)
+    },
     selectPokemon(nameSelected) {
-      return this.selectedPkmnName = nameSelected
+      console.log("how many times in select Pokemon", nameSelected);
+      this.selectedPkmnName = nameSelected
+      let findPokemonNameUrl = this.findPokemon(nameSelected)
+      fetch(findPokemonNameUrl.url)
+      .then(result => result.json())
+      .then(result => this.selectedPkmn = result )
     }
+
   },
   components: {
-    "pokemon-list": PokemonList
+    "pokemon-list": PokemonList,
+    "pokemon-detail": PokemonDetail
   }
 }
 </script>
