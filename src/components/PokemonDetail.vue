@@ -1,7 +1,8 @@
 <template lang="html">
   <div>
     <h2>{{ selectedPkmn.name }}</h2>
-    <p>{{ getTypes() }}</p>
+    <!-- add another section as the selectedpkmn returns id and name immediately, but takes two calls to get the type and returns an empty p if no workaround  -->
+    <p >{{ resultOfGetTypes }}</p>
   </div>
 </template>
 
@@ -9,10 +10,16 @@
 export default {
   name: 'pokemon-detail',
   props: ['selectedPkmn'],
-  data(){
-    return {
-      resultOfGetTypes: null
+  // data(){
+  //   return {
+  //     resultOfGetTypes: null
+  //   }
 
+  computed: {
+    resultOfGetTypes: {
+      get: function() {
+      return  this.getTypes()
+      }
     }
   },
   // mounted() {
@@ -20,17 +27,18 @@ export default {
   // },
   methods: {
     getTypes() {
-      console.log("get types")
-      let selectedPkmnTypes = this.selectedPkmn.types
-      if (!selectedPkmnTypes) return
+      // this.$nextTick(function () {
+        console.log("get types")
+        let selectedPkmnTypes = this.selectedPkmn.types
+        if (!selectedPkmnTypes) return
 
-      let selectedNameTypeZero = selectedPkmnTypes[0].type.name
-      console.log(selectedNameTypeZero)
-      return selectedNameTypeZero
+        let selectedNameTypeZero = selectedPkmnTypes[0].type.name
+        console.log(selectedNameTypeZero)
+        return selectedNameTypeZero
+      // })
     }
   }
 }
-
 
 </script>
 
