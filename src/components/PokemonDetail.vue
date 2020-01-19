@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class= "screen1">
     <h2>{{ selectedPkmn.name }}</h2>
     <p>{{ selectedPkmn.id }}</p>
     <p v-for='type in resultOfGetTypes'>{{ type }}</p>
@@ -33,4 +33,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.screen1 {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 30rem; */
+  /* display: grid; */
+  /* grid-template-columns: 10% 90%; */
+  background-color: grey;
+  border: solid grey thin;
+  height: 561px;
+  justify-content: space-evenly;
+  align-items: center;
+}
 </style>

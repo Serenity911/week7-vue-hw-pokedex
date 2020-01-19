@@ -83,8 +83,10 @@ export default {
   /* max-width: 30rem; */
   display: grid;
   grid-template-columns: 10% 90%;
-  background-color: grey;
+  background-color: yellow;
   border: solid grey thin;
+  height: 561px
+
 }
 .button-bar {
   flex-grow: 10;
