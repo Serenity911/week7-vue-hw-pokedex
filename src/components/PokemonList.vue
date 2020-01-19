@@ -2,9 +2,9 @@
   <div class= "screen">
     <div class="scroll-bar">
       <div class="button-placeholder" v-if="pageNumber === 1"></div>
-      <button type="button" class="button-placeholder" v-if="pageNumber !== 1" v-on:click="handlePreviousPage" v-model="pageNumber"> Previous </button>
+      <button type="button" class="button-placeholder" v-if="pageNumber !== 1" v-on:click="handlePreviousPage" v-model="pageNumber"> <img id="arrow-up" src="../assets/arrow_down.png" alt="previous page">  </button>
       <div class="button-bar"></div>
-      <button type="button" class="button-placeholder" v-on:click="handleNextPage" v-model="pageNumber"> Next </button>
+      <button type="button" class="button-placeholder" v-on:click="handleNextPage" v-model="pageNumber"> <img id="arrow-down" src="../assets/arrow_down.png" alt="next page"> </button>
     </div>
     <div class="list">
       <ul>
@@ -86,7 +86,7 @@ export default {
   background-color: grey;
   border: solid grey thin;
   height: 561px;
-    border-radius: 0.5em;
+  border-radius: 0.5em;
 
 }
 .button-bar {
@@ -145,10 +145,24 @@ li {
   padding: 0.3rem;
   text-align: center;
 }
+
 li:first-of-type {
   border-radius: 0.6em 0.6em 0em 0;
 }
+
 li:last-of-type {
   border-radius: 0em 0em 0.6em 0.6em;
+}
+
+img {
+  height: 35px;
+  padding: 0;
+}
+#arrow-down {
+  transform: rotate(90deg);
+
+}
+#arrow-up {
+  transform: rotate(-90deg);
 }
 </style>

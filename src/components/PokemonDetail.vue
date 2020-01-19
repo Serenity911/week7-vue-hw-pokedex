@@ -137,5 +137,9 @@ export default {
   list-style: none;
 }
 
+img {
+      width: 180%;
+      height: auto;
+}
 
 </style>

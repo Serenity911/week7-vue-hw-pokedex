@@ -16,14 +16,14 @@
       </div>
 
       <div class="middle-container">
-        <pokemon-list :class='displayList' :pokemonNameUrl='pokemonNameUrl' :parentSelectedPkmnName='selectedPkmnName'/>
+        <pokemon-list  :pokemonNameUrl='pokemonNameUrl' :parentSelectedPkmnName='selectedPkmnName'/>
         <!-- <pokemon-detail :class='displayDetail' v-if='selectedPkmn' :selectedPkmn='selectedPkmn' /> -->
       </div>
 
     </div>
     <div class="pokedex">
       <div class="right-screen">
-        <pokemon-detail :class='displayDetail' v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
+        <pokemon-detail  v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
         <!-- <button v-on:click="showMoves">Moves</button> -->
       </div>
 
