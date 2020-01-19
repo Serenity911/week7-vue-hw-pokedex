@@ -1,19 +1,18 @@
 <template lang="html">
   <div class= "screen1">
-    <div class="button-placeholder" v-on:click="getList">Home</div>
+    <div class="button-placeholder" v-on:click="getList">X</div>
     <div class="info">
       <!-- why I need to have selectedPkmn as the first one? if it renders and finds undefined because it hasn't loaded everything yet, it fails the v-if in the app? -->
       <h2>{{ selectedPkmn.name }}</h2>
       <img :src="resultOfGetImg" alt>
-    </div>
-    <div class="horizontal-list">
-      <p v-for='type in resultOfGetTypes'>{{ type }}</p>
+      <div class="horizontal-list">
+        <p v-for='type in resultOfGetTypes'>{{ type }}</p>
+      </div>
     </div>
 
-    <ul class="scrollable-list">
+    <ul id="scrollable-list">
       <li v-for='move in resultOfGetMoves'>{{ move }}</li>
     </ul>
-
   </div>
 </template>
 
@@ -21,7 +20,7 @@
 import { eventBus } from '../main.js'
 export default {
   name: 'pokemon-detail',
-  props: ['selectedPkmn'],
+  props: ['selectedPkmn', 'moves'],
   computed: {
     resultOfGetTypes: {
       get: function() {
@@ -75,6 +74,9 @@ export default {
     getList() {
       eventBus.$emit('home-requested', "home")
 
+    },
+    showMoves(){
+
     }
     // question: why is it calling every function twice? is it because: it renders, the function takes a bit to be processed and returns undefined and I have to call them in computed properties to have them re-evaluated once everything is loaded?
     // getName() {
@@ -94,13 +96,13 @@ export default {
   /* max-width: 30rem; */
   /* display: grid; */
   /* grid-template-columns: 10% 90%; */
-  background-color: grey;
+  background-color: rgb(186, 186, 186);
   border: solid grey thin;
   height: 561px;
   justify-content: space-evenly;
   align-items: center;
 }
-.scrollable-list {
+#scrollable-list {
   overflow: auto;
   list-style: none;
   padding: 0;
