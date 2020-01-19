@@ -1,7 +1,13 @@
 <template lang="html">
-  <div>
-    <pokemon-list :pokemonNameUrl='pokemonNameUrl' :parentSelectedPkmnName='selectedPkmnName'/>
-    <pokemon-detail v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
+  <div id="page-container">
+    <div class="pokedex">
+      <div>
+        <pokemon-list :pokemonNameUrl='pokemonNameUrl' :parentSelectedPkmnName='selectedPkmnName'/>
+        <pokemon-detail v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
+      </div>
+      <div class="poke-end">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,6 +55,25 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+#page-container {
+display: flex;
+align-content: center;
+}
+.pokedex {
+  border: solid red thin;
+  border-radius: 2em;
+  background-color: red;
+  padding: 5em;
+  max-width: 30rem;
+  align-self: center;
+  flex-grow: 1;
+  margin-top: 1rem;
+}
 
+
+.poke-end {
+  background-color: red;
+  height: 10rem;
+}
 </style>

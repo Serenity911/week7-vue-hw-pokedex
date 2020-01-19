@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
     <h2>{{ selectedPkmn.name }}</h2>
+    <p>{{ selectedPkmn.id }}</p>
     <p v-for='type in resultOfGetTypes'>{{ type }}</p>
   </div>
 </template>
