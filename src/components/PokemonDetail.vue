@@ -15,17 +15,48 @@ export default {
       get: function() {
       return  this.getTypes()
       }
+    },
+    resultOfGetImg: {
+      get: function() {
+        return this.getImg()
+      }
+    },
+    resultOfGetAbilities: {
+      get: function() {
+        return this.getAbilities()
+      }
+    },
+    resultOfGetMoves: {
+      get: function() {
+        return this.getMoves()
+      }
     }
   },
   methods: {
     getTypes() {
-        console.log("get types")
+        // console.log("get types")
         let selectedPkmnTypes = this.selectedPkmn.types
         if (!selectedPkmnTypes) return
         let selectedNameTypeZero = []
         selectedPkmnTypes.forEach(el => selectedNameTypeZero.push(el.type.name))
         return selectedNameTypeZero
-      // })
+    },
+    getImg() {
+      return this.selectedPkmn.sprites.front_default
+    },
+    getAbilities() {
+      let selectedPkmnAbilities = this.selectedPkmn.abilities
+      // console.log(selectedPkmnAbilities);
+      let selectedPkmnAbilitiesNames = []
+       selectedPkmnAbilities.forEach(el => selectedPkmnAbilitiesNames.push(el.ability.name))
+      return selectedPkmnAbilitiesNames
+    },
+    getMoves() {
+      let selectedPkmnMoves = this.selectedPkmn.moves
+      console.log(selectedPkmnMoves);
+      let selectedPkmnMovesNames = []
+       selectedPkmnMoves.forEach(el => selectedPkmnMovesNames.push(el.move.name))
+      return selectedPkmnMovesNames
     }
   }
 }
