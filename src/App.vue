@@ -159,6 +159,7 @@ export default {
   padding-top: 3%;
 
 }
+/* rendering gets a bit randomic, ask why? */
 .mini-circle {
   width: 20px;
   height: 20px;

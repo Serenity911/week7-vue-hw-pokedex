@@ -3,9 +3,10 @@
     <div class="button-placeholder" v-on:click="getList">X</div>
     <div class="info">
       <!-- why I need to have selectedPkmn as the first one? if it renders and finds undefined because it hasn't loaded everything yet, it fails the v-if in the app? -->
-      <h2>{{ selectedPkmn.name }}</h2>
+      <h1>{{ selectedPkmn.name }}</h1>
       <img :src="resultOfGetImg" alt>
       <div class="horizontal-list">
+        <!-- ASK css -->
         <p v-for='type in resultOfGetTypes'>{{ type }}</p>
       </div>
     </div>
@@ -74,9 +75,6 @@ export default {
     getList() {
       eventBus.$emit('home-requested', "home")
 
-    },
-    showMoves(){
-
     }
     // question: why is it calling every function twice? is it because: it renders, the function takes a bit to be processed and returns undefined and I have to call them in computed properties to have them re-evaluated once everything is loaded?
     // getName() {
@@ -124,6 +122,11 @@ export default {
   flex-grow: 1;
   align-self: flex-start;
 }
+.button-placeholder:hover {
+  background-color: rgb(149, 149, 149);
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
+}
+
 .info {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -138,8 +141,8 @@ export default {
 }
 
 img {
-      width: 180%;
-      height: auto;
+  width: 180%;
+  height: auto;
 }
 
 </style>

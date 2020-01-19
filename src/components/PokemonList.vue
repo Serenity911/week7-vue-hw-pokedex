@@ -68,7 +68,7 @@ export default {
   border-style: solid;
   border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
   flex-grow: 1;
-
+  outline : none;
 }
 
 .button-placeholder:last-of-type {
@@ -154,15 +154,33 @@ li:last-of-type {
   border-radius: 0em 0em 0.6em 0.6em;
 }
 
+li:hover {
+  background-color: rgb(149, 149, 149);
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
+}
+
+
 img {
   height: 35px;
   padding: 0;
 }
 #arrow-down {
   transform: rotate(90deg);
+  outline : none;
+}
+.button-placeholder:hover {
+  background-color: rgb(149, 149, 149);
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
+
+}
+
+.button-placeholder:active {
+  background-color: rgb(209, 209, 209);
 
 }
 #arrow-up {
   transform: rotate(-90deg);
+  outline : none;
 }
+
 </style>
