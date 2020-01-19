@@ -16,12 +16,8 @@ export default {
       }
     }
   },
-  // mounted() {
-  //   this.getTypes()
-  // },
   methods: {
     getTypes() {
-      // this.$nextTick(function () {
         console.log("get types")
         let selectedPkmnTypes = this.selectedPkmn.types
         if (!selectedPkmnTypes) return
