@@ -1,12 +1,18 @@
 <template lang="html">
   <div class= "screen1">
+    <div class="button-placeholder" v-on:click="getList">Home</div>
     <h2>{{ selectedPkmn.name }}</h2>
-    <p>{{ selectedPkmn.id }}</p>
+    <img :src="resultOfGetImg" alt>
     <p v-for='type in resultOfGetTypes'>{{ type }}</p>
+    <ul class="scrollable-list">
+      <li v-for='move in resultOfGetMoves'>{{ move }}</li>
+    </ul>
+
   </div>
 </template>
 
 <script>
+import { eventBus } from '../main.js'
 export default {
   name: 'pokemon-detail',
   props: ['selectedPkmn'],
@@ -42,6 +48,8 @@ export default {
         return selectedNameTypeZero
     },
     getImg() {
+      let selectedPkmnSprites = this.selectedPkmn.sprites
+      console.log("how many sprites", selectedPkmnSprites);
       return this.selectedPkmn.sprites.front_default
     },
     getAbilities() {
@@ -57,7 +65,16 @@ export default {
       let selectedPkmnMovesNames = []
        selectedPkmnMoves.forEach(el => selectedPkmnMovesNames.push(el.move.name))
       return selectedPkmnMovesNames
+    },
+    getList() {
+      eventBus.$emit('home-requested', "home")
+
     }
+    // getName() {
+    //   let namegetname = this.selectedPkmn.sprites
+    //   console.log("how many times get name", namegetname);
+    //   return namegetname
+    // }
   }
 }
 
@@ -75,5 +92,23 @@ export default {
   height: 561px;
   justify-content: space-evenly;
   align-items: center;
+}
+.scrollable-list {
+  overflow: auto;
+}
+
+.button-placeholder {
+  border-radius: 0.6em;
+  display: inline-block;
+  align-items: flex-start;
+  background-color: rgb(186, 186, 186);
+  box-sizing: border-box;
+  margin: 0.5em;
+  padding: 1px 7px 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  flex-grow: 1;
+  align-self: flex-start;
 }
 </style>

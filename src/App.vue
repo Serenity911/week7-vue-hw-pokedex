@@ -28,6 +28,8 @@ export default {
   mounted() {
     this.fetchPomekonNames(),
     eventBus.$on('pokemon-selected', (nameSelected) => this.selectPokemon(nameSelected))
+    eventBus.$on('home-requested', (home) => this.selectedPkmn = null)
+
   },
   computed: {
     displayDetail: function () {
