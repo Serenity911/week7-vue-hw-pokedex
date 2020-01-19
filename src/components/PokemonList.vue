@@ -83,9 +83,10 @@ export default {
   /* max-width: 30rem; */
   display: grid;
   grid-template-columns: 10% 90%;
-  background-color: yellow;
+  background-color: grey;
   border: solid grey thin;
-  height: 561px
+  height: 561px;
+    border-radius: 0.5em;
 
 }
 .button-bar {

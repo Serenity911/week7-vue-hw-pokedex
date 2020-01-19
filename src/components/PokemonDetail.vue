@@ -1,9 +1,15 @@
 <template lang="html">
   <div class= "screen1">
     <div class="button-placeholder" v-on:click="getList">Home</div>
-    <h2>{{ selectedPkmn.name }}</h2>
-    <img :src="resultOfGetImg" alt>
-    <p v-for='type in resultOfGetTypes'>{{ type }}</p>
+    <div class="info">
+      <!-- why I need to have selectedPkmn as the first one? if it renders and finds undefined because it hasn't loaded everything yet, it fails the v-if in the app? -->
+      <h2>{{ selectedPkmn.name }}</h2>
+      <img :src="resultOfGetImg" alt>
+    </div>
+    <div class="horizontal-list">
+      <p v-for='type in resultOfGetTypes'>{{ type }}</p>
+    </div>
+
     <ul class="scrollable-list">
       <li v-for='move in resultOfGetMoves'>{{ move }}</li>
     </ul>
@@ -19,7 +25,7 @@ export default {
   computed: {
     resultOfGetTypes: {
       get: function() {
-      return  this.getTypes()
+        return  this.getTypes()
       }
     },
     resultOfGetImg: {
@@ -40,12 +46,12 @@ export default {
   },
   methods: {
     getTypes() {
-        // console.log("get types")
-        let selectedPkmnTypes = this.selectedPkmn.types
-        if (!selectedPkmnTypes) return
-        let selectedNameTypeZero = []
-        selectedPkmnTypes.forEach(el => selectedNameTypeZero.push(el.type.name))
-        return selectedNameTypeZero
+      // console.log("get types")
+      let selectedPkmnTypes = this.selectedPkmn.types
+      if (!selectedPkmnTypes) return
+      let selectedNameTypeZero = []
+      selectedPkmnTypes.forEach(el => selectedNameTypeZero.push(el.type.name))
+      return selectedNameTypeZero
     },
     getImg() {
       let selectedPkmnSprites = this.selectedPkmn.sprites
@@ -56,20 +62,21 @@ export default {
       let selectedPkmnAbilities = this.selectedPkmn.abilities
       // console.log(selectedPkmnAbilities);
       let selectedPkmnAbilitiesNames = []
-       selectedPkmnAbilities.forEach(el => selectedPkmnAbilitiesNames.push(el.ability.name))
+      selectedPkmnAbilities.forEach(el => selectedPkmnAbilitiesNames.push(el.ability.name))
       return selectedPkmnAbilitiesNames
     },
     getMoves() {
       let selectedPkmnMoves = this.selectedPkmn.moves
       console.log(selectedPkmnMoves);
       let selectedPkmnMovesNames = []
-       selectedPkmnMoves.forEach(el => selectedPkmnMovesNames.push(el.move.name))
+      selectedPkmnMoves.forEach(el => selectedPkmnMovesNames.push(el.move.name))
       return selectedPkmnMovesNames
     },
     getList() {
       eventBus.$emit('home-requested', "home")
 
     }
+    // question: why is it calling every function twice? is it because: it renders, the function takes a bit to be processed and returns undefined and I have to call them in computed properties to have them re-evaluated once everything is loaded?
     // getName() {
     //   let namegetname = this.selectedPkmn.sprites
     //   console.log("how many times get name", namegetname);
@@ -95,6 +102,10 @@ export default {
 }
 .scrollable-list {
   overflow: auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 40% 40% 40%;
 }
 
 .button-placeholder {
@@ -111,4 +122,18 @@ export default {
   flex-grow: 1;
   align-self: flex-start;
 }
+.info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+
+.horizontal-list {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  justify-content: center;
+  list-style: none;
+}
+
+
 </style>
