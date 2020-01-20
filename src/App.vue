@@ -62,23 +62,27 @@ export default {
     return {
       pokemonNameUrl: [],
       selectedPkmnName: 'bulbasaur',
-      selectedPkmn: null
+      selectedPkmn: null,
+      typedName: ""
     }
   },
   mounted() {
     this.fetchPomekonNames(),
     eventBus.$on('pokemon-selected', (nameSelected) => this.selectPokemon(nameSelected))
     eventBus.$on('home-requested', (home) => this.selectedPkmn = null)
+    eventBus.$on('pokemon-typed', (typedName) => this.searchPkmn(typedName) )
+
 
   },
-  computed: {
+  // computed: {
     // displayDetail: function () {
     //   return this.selectedPkmn ? "toggleOn" : "toggleOff"
     // },
     // displayList: function () {
     //   return this.selectedPkmn ? "toggleOff" : "toggleOn"
     // }
-  },
+
+  // },
   methods: {
     fetchPomekonNames() {
       fetch('https://pokeapi.co/api/v2/pokemon/?limit=808')
@@ -98,7 +102,18 @@ export default {
     },
     showMoves() {
       this.moves = "yes"
-    }
+    },
+    searchPkmn(typedName) {
+        // console.log("selected pkmn before search", typedName);
+        this.typedName = typedName
+        let mappedNames = this.pokemonNameUrl.map(el => el.name.toLowerCase())
+        // console.log("mapped Names", mappedNames)
+        let pokemonTyped = mappedNames.find(pokemon => pokemon.startsWith(this.typedName))
+        // console.log("selected pkmn middle search", pokemonTyped);
+        // this.selectedPkmnName = pokemonTyped
+        return this.selectPokemon(pokemonTyped)
+        // console.log("selected pkmn after search", selectedPkmn);
+      }
   },
   components: {
     "pokemon-list": PokemonList,

@@ -11,6 +11,8 @@
         <li v-if="pokemon" v-for="pokemon in getTwentyItems" v-on:click="handleSelection(pokemon.name)"> {{ pokemon.name }} </li>
       </ul>
     </div>
+    <input type="text" v-model="typedPkmn">
+
   </div>
 </template>
 
@@ -22,8 +24,14 @@ export default {
   data() {
     return {
       selectedPkmnName: this.parentSelectedPkmnName,
-      pageNumber: 1
+      pageNumber: 1,
+      typedPkmn: ""
     }
+  },
+  watch: {
+    typedPkmn: function() {
+        eventBus.$emit('pokemon-typed', this.typedPkmn)
+        }
   },
   computed: {
     getTwentyItems: function() {
