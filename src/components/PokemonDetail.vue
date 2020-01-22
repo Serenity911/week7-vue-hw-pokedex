@@ -4,7 +4,7 @@
     <div class="info">
       <!-- why I need to have selectedPkmn as the first one? if it renders and finds undefined because it hasn't loaded everything yet, it fails the v-if in the app? -->
       <h1>{{ selectedPkmn.name }}</h1>
-      <img :src="resultOfGetImg" alt>
+      <img :src="resultOfGetImg">
       <div class="horizontal-list">
         <!-- ASK css -->
         <p v-for='type in resultOfGetTypes'>{{ type }}</p>
@@ -21,27 +21,19 @@
 import { eventBus } from '../main.js'
 export default {
   name: 'pokemon-detail',
-  props: ['selectedPkmn', 'moves'],
+  props: ['selectedPkmn'],
   computed: {
-    resultOfGetTypes: {
-      get: function() {
+    resultOfGetTypes: function() {
         return  this.getTypes()
-      }
     },
-    resultOfGetImg: {
-      get: function() {
+    resultOfGetImg: function() {
         return this.getImg()
-      }
     },
-    resultOfGetAbilities: {
-      get: function() {
+    resultOfGetAbilities: function() {
         return this.getAbilities()
-      }
     },
-    resultOfGetMoves: {
-      get: function() {
+    resultOfGetMoves: function() {
         return this.getMoves()
-      }
     }
   },
   methods: {
@@ -49,11 +41,12 @@ export default {
       // console.log("get types")
       let selectedPkmnTypes = this.selectedPkmn.types
       if (!selectedPkmnTypes) return
-      let selectedNameTypeZero = []
-      selectedPkmnTypes.forEach(el => selectedNameTypeZero.push(el.type.name))
-      return selectedNameTypeZero
+      let selectedNameType = []
+      selectedPkmnTypes.forEach(el => selectedNameType.push(el.type.name))
+      return selectedNameType
     },
     getImg() {
+      debugger
       let selectedPkmnSprites = this.selectedPkmn.sprites
       console.log("how many sprites", selectedPkmnSprites);
       return this.selectedPkmn.sprites.front_default

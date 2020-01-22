@@ -4,15 +4,17 @@
       <div class="button-placeholder" v-if="pageNumber === 1"></div>
       <button type="button" class="button-placeholder" v-if="pageNumber !== 1" v-on:click="handlePreviousPage" v-model="pageNumber"> <img id="arrow-up" src="../assets/arrow_down.png" alt="previous page">  </button>
       <div class="button-bar"></div>
-      <button type="button" class="button-placeholder" v-on:click="handleNextPage" v-model="pageNumber"> <img id="arrow-down" src="../assets/arrow_down.png" alt="next page"> </button>
+      <button type="button" class="button-placeholder" v-on:click="handleNextPage" v-model="pageNumber">
+<!-- how to make an absolute path ? -->
+      <img id="arrow-down" src="../assets/arrow_down.png" alt="next page"> </button>
     </div>
     <div class="list">
       <ul>
         <li v-if="pokemon" v-for="pokemon in getTwentyItems" v-on:click="handleSelection(pokemon.name)"> {{ pokemon.name }} </li>
       </ul>
     </div>
-    <input type="text" v-model="typedPkmn">
-
+      <label>Search</label>
+      <input type="text" v-model="typedPkmn">
   </div>
 </template>
 
@@ -191,4 +193,18 @@ img {
   outline : none;
 }
 
+input {
+  min-width: 30px;
+}
+
+label {
+  background-color: rgb(186, 186, 186);
+  border: solid thin;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  margin-top: 20%;
+}
+
+input {
+  margin-top: 3%;
+}
 </style>

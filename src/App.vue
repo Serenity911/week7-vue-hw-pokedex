@@ -71,8 +71,6 @@ export default {
     eventBus.$on('pokemon-selected', (nameSelected) => this.selectPokemon(nameSelected))
     eventBus.$on('home-requested', (home) => this.selectedPkmn = null)
     eventBus.$on('pokemon-typed', (typedName) => this.searchPkmn(typedName) )
-
-
   },
   // computed: {
     // displayDetail: function () {
@@ -227,4 +225,5 @@ export default {
   margin-top: 2px;
 
 }
+
 </style>
