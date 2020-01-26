@@ -29,8 +29,8 @@
 
       <div class="poke-end">
         <div class="buttons">
+          <button v-on:click="section = 'info' ">Info</button>
           <button v-on:click="section = 'moves' ">Moves</button>
-          <button></button>
           <button></button>
           <button></button>
           <button></button>
@@ -61,7 +61,7 @@ export default {
       selectedPkmnName: 'bulbasaur',
       selectedPkmn: null,
       typedName: "",
-      section: "info"
+      section: ""
     }
   },
   mounted() {
@@ -92,6 +92,7 @@ export default {
       // console.log("how many times in select Pokemon", nameSelected);
       // this.selectedPkmnName = nameSelected
       let findPokemonNameUrl = this.findPokemon(nameSelected)
+      this.section = "info"
       fetch(findPokemonNameUrl.url)
       .then(result => result.json())
       .then(result => this.selectedPkmn = result )

@@ -13,7 +13,7 @@
 
     <!-- get moves -->
     <div class="moves" v-if="showMoves">
-      <h1>{{ selectedPkmn.name }}: Moves</h1>
+      <h2>{{ selectedPkmn.name }}: Moves</h2>
       <ul id="scrollable-list">
         <li v-for='move in resultOfGetMoves'>{{ move }}</li>
       </ul>
@@ -29,28 +29,28 @@ export default {
   data() {
     return {
       showGeneralInfo: true,
-      showMoves: false
+      showMoves: ""
     }
   },
   watch: {
     section: function () {
-      if (this.section === 'info') {
-        console.log("this section", this.section);
-        console.log("showGeneralInfo before", this.showGeneralInfo);
+      if (this.section === "info") {
+        // console.log("this section", this.section);
+        // console.log("showGeneralInfo before", this.showGeneralInfo);
         this.showGeneralInfo = true
-        console.log("showGeneralInfo after", this.showGeneralInfo);
+        // console.log("showGeneralInfo after", this.showGeneralInfo);
         this.showMoves = false
-        console.log("showMoves after", this.showMoves);
+        // console.log("showMoves after", this.showMoves);
       }
-      else (this.section === 'moves')
-      console.log("this section", this.section);
-      console.log("showMoves before", this.showMoves);
-
+      else if (this.section === 'moves') {
+      // console.log("this section", this.section);
+      // console.log("showMoves before", this.showMoves);
       this.showMoves = true
-      console.log("showMoves after", this.showMoves);
+      // console.log("showMoves after", this.showMoves);
       this.showGeneralInfo = false
-      console.log("showGeneralInfo after", this.showGeneralInfo);
+      // console.log("showGeneralInfo after", this.showGeneralInfo);
     }
+  }
   },
   computed: {
     resultOfGetTypes: function() {
@@ -175,10 +175,15 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 #scrollable-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   list-style: none;
+  padding: 0;
+  margin: 2% 0;
+  overflow: scroll;
+
   /* overflow: auto;
   list-style: none;
   padding: 0;
@@ -197,6 +202,10 @@ export default {
   /* display: grid;
   grid-template-columns: 50% 50%;
   align-items: center; */
+}
+
+h2 {
+  margin: 2% 0;
 }
 
 .horizontal-list {
