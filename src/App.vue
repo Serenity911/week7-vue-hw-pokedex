@@ -67,7 +67,7 @@ export default {
   mounted() {
     this.fetchPomekonNames(),
     eventBus.$on('pokemon-selected', (nameSelected) => this.selectPokemon(nameSelected))
-    eventBus.$on('home-requested', (home) => this.selectedPkmn = null)
+    eventBus.$on('home-requested', () => this.handleHomeRequested())
     eventBus.$on('pokemon-typed', (typedName) => this.searchPkmn(typedName) )
   },
   // computed: {
@@ -109,7 +109,11 @@ export default {
         // this.selectedPkmnName = pokemonTyped
         return this.selectPokemon(pokemonTyped)
         // console.log("selected pkmn after search", selectedPkmn);
-      }
+      },
+    handleHomeRequested() {
+        this.selectedPkmn = null
+        this.section = "info"
+    }
   },
   components: {
     "pokemon-list": PokemonList,
