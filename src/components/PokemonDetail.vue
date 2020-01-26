@@ -1,19 +1,22 @@
 <template lang="html">
   <div class= "screen1">
     <div class="button-placeholder" v-on:click="getList">X</div>
-    <div class="info">
+    <div class="info" v-if="showGeneralInfo">
       <!-- why I need to have selectedPkmn as the first one? if it renders and finds undefined because it hasn't loaded everything yet, it fails the v-if in the app? -->
       <h1>{{ selectedPkmn.name }}</h1>
       <img :src="resultOfGetImg">
+      <!-- get type  -->
       <div class="horizontal-list">
-        <!-- ASK css -->
         <p v-for='type in resultOfGetTypes'>{{ type }}</p>
       </div>
     </div>
 
-    <ul id="scrollable-list">
-      <li v-for='move in resultOfGetMoves'>{{ move }}</li>
-    </ul>
+    <!-- get moves -->
+    <div class="moves" v-if="showMoves">
+      <ul id="scrollable-list">
+        <li v-for='move in resultOfGetMoves'>{{ move }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -21,24 +24,36 @@
 import { eventBus } from '../main.js'
 export default {
   name: 'pokemon-detail',
-  props: ['selectedPkmn'],
+  props: ['selectedPkmn', 'section'],
+  data() {
+    return {
+      showGeneralInfo: true,
+      showMoves: false
+    }
+  },
   computed: {
     resultOfGetTypes: function() {
-        return  this.getTypes()
+      return  this.getTypes()
     },
     resultOfGetImg: function() {
-        return this.getImg()
+      let selectedPkmnSprites = this.selectedPkmn.sprites
+      if (!selectedPkmnSprites) return "";
+      console.log("how many sprites", selectedPkmnSprites);
+      return this.selectedPkmn.sprites.front_default
     },
     resultOfGetAbilities: function() {
-        return this.getAbilities()
+      return this.getAbilities()
     },
     resultOfGetMoves: function() {
-        return this.getMoves()
+      return this.getMoves()
+    },
+    showSection: function() {
+      this.section === 'info' ? this.showGeneralInfo = true : this.showGeneralInfo = false
+
     }
   },
   methods: {
     getTypes() {
-      // console.log("get types")
       let selectedPkmnTypes = this.selectedPkmn.types
       if (!selectedPkmnTypes) return
       let selectedNameType = []
@@ -46,10 +61,7 @@ export default {
       return selectedNameType
     },
     getImg() {
-      debugger
-      let selectedPkmnSprites = this.selectedPkmn.sprites
-      console.log("how many sprites", selectedPkmnSprites);
-      return this.selectedPkmn.sprites.front_default
+
     },
     getAbilities() {
       let selectedPkmnAbilities = this.selectedPkmn.abilities
@@ -69,6 +81,7 @@ export default {
       eventBus.$emit('home-requested', "home")
 
     }
+
     // question: why is it calling every function twice? is it because: it renders, the function takes a bit to be processed and returns undefined and I have to call them in computed properties to have them re-evaluated once everything is loaded?
     // getName() {
     //   let namegetname = this.selectedPkmn.sprites
@@ -81,61 +94,93 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.screen1 {
-  display: flex;
-  flex-direction: column;
-  /* max-width: 30rem; */
-  /* display: grid; */
-  /* grid-template-columns: 10% 90%; */
-  background-color: rgb(186, 186, 186);
-  border: solid grey thin;
-  height: 561px;
-  justify-content: space-evenly;
-  align-items: center;
-}
-#scrollable-list {
-  overflow: auto;
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 40% 40% 40%;
-}
+  .screen1 {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 5% 85% 10%;
+    grid-template-areas:
+    "button1 . . . ."
+    " . title title title ."
+    " .  . type . .";
+    /* grid-template:
+    [row1-start] "button1 . . . . ." 20px [row1-end]
+    [row1-start] "title title title" 25px [row1-end] */
 
-.button-placeholder {
-  border-radius: 0.6em;
-  display: inline-block;
-  align-items: flex-start;
-  background-color: rgb(186, 186, 186);
-  box-sizing: border-box;
-  margin: 0.5em;
-  padding: 1px 7px 2px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-  flex-grow: 1;
-  align-self: flex-start;
-}
-.button-placeholder:hover {
-  background-color: rgb(149, 149, 149);
-  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
-}
+    background-color: rgb(186, 186, 186);
+    border: solid grey thin;
+    height: 561px;
+    justify-content: center;
 
-.info {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-}
+  }
+  h1 {
 
-.horizontal-list {
-  display: grid;
-  grid-template-columns: 50px 50px;
-  justify-content: center;
-  list-style: none;
-}
 
-img {
-  width: 180%;
-  height: auto;
-}
+  }
+  .moves{
+    grid-area: moves;
+    /* grid-row: 5/5; */
+
+
+  }
+  #scrollable-list {
+    /* overflow: auto;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 40% 40% 40%; */
+  }
+
+  .button-placeholder {
+    grid-area: button1;
+    grid-row: 1/3;
+    /* border-radius: 0.6em;
+    display: inline-block;
+    align-items: flex-start;
+    background-color: rgb(186, 186, 186);
+    box-sizing: border-box;
+    margin: 0.5em;
+    padding: 1px 7px 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    flex-grow: 1;
+    align-self: flex-start; */
+  }
+  .button-placeholder:hover {
+    background-color: rgb(149, 149, 149);
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
+  }
+
+  .info {
+    grid-area: title;
+    grid-row: 2/3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center; */
+  }
+
+  .horizontal-list {
+    grid-area: type;
+    /* grid-row: 3/3; */
+
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    /* display: grid;
+    grid-template-columns: 50px 50px;
+    justify-content: center;
+    list-style: none; */
+  }
+
+  img {
+    /* grid-area: img; */
+    /* grid-row: 3/5; */
+    width: 155%;
+    flex-shrink: 0;
+    height: auto;
+  }
 
 </style>

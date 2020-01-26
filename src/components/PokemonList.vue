@@ -42,7 +42,7 @@ export default {
       let firstItem = (this.pageNumber - 1) * itemsPerPage
       let twentyItemsNameUrl = []
       for (let i = firstItem; i < lastItem; i++) {
-        console.log(this.pokemonNameUrl[i])
+        // console.log(this.pokemonNameUrl[i])
         twentyItemsNameUrl.push(this.pokemonNameUrl[i])
       }
       return twentyItemsNameUrl

@@ -23,7 +23,7 @@
     </div>
     <div class="pokedex">
       <div class="right-screen">
-        <pokemon-detail  v-if='selectedPkmn' :selectedPkmn='selectedPkmn' />
+        <pokemon-detail  v-if='selectedPkmn' :selectedPkmn='selectedPkmn' :section='section' />
         <!-- <button v-on:click="showMoves">Moves</button> -->
       </div>
 
@@ -63,7 +63,8 @@ export default {
       pokemonNameUrl: [],
       selectedPkmnName: 'bulbasaur',
       selectedPkmn: null,
-      typedName: ""
+      typedName: "",
+      section: "info"
     }
   },
   mounted() {
@@ -91,8 +92,8 @@ export default {
       return this.selectedPkmn = this.pokemonNameUrl.find(pokemon => pokemon.name === name)
     },
     selectPokemon(nameSelected) {
-      console.log("how many times in select Pokemon", nameSelected);
-      this.selectedPkmnName = nameSelected
+      // console.log("how many times in select Pokemon", nameSelected);
+      // this.selectedPkmnName = nameSelected
       let findPokemonNameUrl = this.findPokemon(nameSelected)
       fetch(findPokemonNameUrl.url)
       .then(result => result.json())
