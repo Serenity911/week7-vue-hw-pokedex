@@ -13,6 +13,7 @@
 
     <!-- get moves -->
     <div class="moves" v-if="showMoves">
+      <h1>{{ selectedPkmn.name }}: Moves</h1>
       <ul id="scrollable-list">
         <li v-for='move in resultOfGetMoves'>{{ move }}</li>
       </ul>
@@ -38,7 +39,6 @@ export default {
         console.log("showGeneralInfo before", this.showGeneralInfo);
         this.showGeneralInfo = true
         console.log("showGeneralInfo after", this.showGeneralInfo);
-
         this.showMoves = false
         console.log("showMoves after", this.showMoves);
       }
@@ -131,10 +131,10 @@ export default {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 5% 85% 10%;
-  grid-template-areas:
+  /* grid-template-areas:
   "button1 . . . ."
   " . title title title ."
-  " .  . type . .";
+  " .  . type . ."; */
   /* grid-template:
   [row1-start] "button1 . . . . ." 20px [row1-end]
   [row1-start] "title title title" 25px [row1-end] */
@@ -143,29 +143,12 @@ export default {
   border: solid grey thin;
   height: 561px;
   justify-content: center;
-
-}
-h1 {
-
-
-}
-.moves{
-  grid-area: moves;
-  /* grid-row: 5/5; */
-
-
-}
-#scrollable-list {
-  /* overflow: auto;
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 40% 40% 40%; */
 }
 
 .button-placeholder {
-  grid-area: button1;
-  grid-row: 1/3;
+  /* grid-area: button1; */
+  grid-column: 1;
+  grid-row: 1;
   /* border-radius: 0.6em;
   display: inline-block;
   align-items: flex-start;
@@ -184,9 +167,30 @@ h1 {
   border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
 }
 
+.moves{
+  /* grid-area: moves; */
+  grid-row: 2/ span 2 ;
+  grid-column: 1/ span 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#scrollable-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  list-style: none;
+  /* overflow: auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 40% 40% 40%; */
+}
+
+
 .info {
-  grid-area: title;
-  grid-row: 2/3;
+  /* grid-area: info; */
+  grid-column: 2/ span 3;
+  grid-row: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -196,8 +200,9 @@ h1 {
 }
 
 .horizontal-list {
-  grid-area: type;
-  /* grid-row: 3/3; */
+  /* grid-area: type; */
+  grid-row: 3;
+  grid-column: 3;
 
   display: flex;
   width: 100%;
