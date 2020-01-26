@@ -29,7 +29,7 @@
 
       <div class="poke-end">
         <div class="buttons">
-          <button></button>
+          <button v-on:click="section = 'moves' ">Moves</button>
           <button></button>
           <button></button>
           <button></button>
@@ -44,10 +44,7 @@
         <div class="medium-circled-button">
         </div>
       </div>
-
-
     </div>
-
   </div>
 </template>
 

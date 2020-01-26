@@ -31,6 +31,27 @@ export default {
       showMoves: false
     }
   },
+  watch: {
+    section: function () {
+      if (this.section === 'info') {
+        console.log("this section", this.section);
+        console.log("showGeneralInfo before", this.showGeneralInfo);
+        this.showGeneralInfo = true
+        console.log("showGeneralInfo after", this.showGeneralInfo);
+
+        this.showMoves = false
+        console.log("showMoves after", this.showMoves);
+      }
+      else (this.section === 'moves')
+      console.log("this section", this.section);
+      console.log("showMoves before", this.showMoves);
+
+      this.showMoves = true
+      console.log("showMoves after", this.showMoves);
+      this.showGeneralInfo = false
+      console.log("showGeneralInfo after", this.showGeneralInfo);
+    }
+  },
   computed: {
     resultOfGetTypes: function() {
       return  this.getTypes()
@@ -46,11 +67,23 @@ export default {
     },
     resultOfGetMoves: function() {
       return this.getMoves()
-    },
-    showSection: function() {
-      this.section === 'info' ? this.showGeneralInfo = true : this.showGeneralInfo = false
-
     }
+    // showSection: function() {
+    //   if (this.section === 'info') {
+    //     console.log("this section", this.section);
+    //     console.log("showGeneralInfo before", this.showGeneralInfo);
+    //     this.showGeneralInfo = true
+    //     console.log("showGeneralInfo after", this.showGeneralInfo);
+    //
+    //     this.showMoves = false
+    //     console.log("showMoves after", this.showMoves);
+    //   }
+    //   else (this.section === 'moves')
+    //      this.showMoves = true
+    //      this.showGeneralInfo = false
+    //
+    //
+    // }
   },
   methods: {
     getTypes() {
@@ -94,93 +127,93 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  .screen1 {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 5% 85% 10%;
-    grid-template-areas:
-    "button1 . . . ."
-    " . title title title ."
-    " .  . type . .";
-    /* grid-template:
-    [row1-start] "button1 . . . . ." 20px [row1-end]
-    [row1-start] "title title title" 25px [row1-end] */
+.screen1 {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 5% 85% 10%;
+  grid-template-areas:
+  "button1 . . . ."
+  " . title title title ."
+  " .  . type . .";
+  /* grid-template:
+  [row1-start] "button1 . . . . ." 20px [row1-end]
+  [row1-start] "title title title" 25px [row1-end] */
 
-    background-color: rgb(186, 186, 186);
-    border: solid grey thin;
-    height: 561px;
-    justify-content: center;
+  background-color: rgb(186, 186, 186);
+  border: solid grey thin;
+  height: 561px;
+  justify-content: center;
 
-  }
-  h1 {
-
-
-  }
-  .moves{
-    grid-area: moves;
-    /* grid-row: 5/5; */
+}
+h1 {
 
 
-  }
-  #scrollable-list {
-    /* overflow: auto;
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 40% 40% 40%; */
-  }
+}
+.moves{
+  grid-area: moves;
+  /* grid-row: 5/5; */
 
-  .button-placeholder {
-    grid-area: button1;
-    grid-row: 1/3;
-    /* border-radius: 0.6em;
-    display: inline-block;
-    align-items: flex-start;
-    background-color: rgb(186, 186, 186);
-    box-sizing: border-box;
-    margin: 0.5em;
-    padding: 1px 7px 2px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-    flex-grow: 1;
-    align-self: flex-start; */
-  }
-  .button-placeholder:hover {
-    background-color: rgb(149, 149, 149);
-    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
-  }
 
-  .info {
-    grid-area: title;
-    grid-row: 2/3;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center; */
-  }
+}
+#scrollable-list {
+  /* overflow: auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 40% 40% 40%; */
+}
 
-  .horizontal-list {
-    grid-area: type;
-    /* grid-row: 3/3; */
+.button-placeholder {
+  grid-area: button1;
+  grid-row: 1/3;
+  /* border-radius: 0.6em;
+  display: inline-block;
+  align-items: flex-start;
+  background-color: rgb(186, 186, 186);
+  box-sizing: border-box;
+  margin: 0.5em;
+  padding: 1px 7px 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  flex-grow: 1;
+  align-self: flex-start; */
+}
+.button-placeholder:hover {
+  background-color: rgb(149, 149, 149);
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(148, 146, 146);
+}
 
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    /* display: grid;
-    grid-template-columns: 50px 50px;
-    justify-content: center;
-    list-style: none; */
-  }
+.info {
+  grid-area: title;
+  grid-row: 2/3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center; */
+}
 
-  img {
-    /* grid-area: img; */
-    /* grid-row: 3/5; */
-    width: 155%;
-    flex-shrink: 0;
-    height: auto;
-  }
+.horizontal-list {
+  grid-area: type;
+  /* grid-row: 3/3; */
+
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  /* display: grid;
+  grid-template-columns: 50px 50px;
+  justify-content: center;
+  list-style: none; */
+}
+
+img {
+  /* grid-area: img; */
+  /* grid-row: 3/5; */
+  width: 155%;
+  flex-shrink: 0;
+  height: auto;
+}
 
 </style>
