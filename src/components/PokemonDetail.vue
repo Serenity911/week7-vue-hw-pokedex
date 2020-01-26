@@ -225,7 +225,7 @@ h2 {
 img {
   /* grid-area: img; */
   /* grid-row: 3/5; */
-  width: 155%;
+  width: 135%;
   flex-shrink: 0;
   height: auto;
 }

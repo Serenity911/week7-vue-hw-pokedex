@@ -173,8 +173,9 @@ export default {
   padding-left: 10%;
   display: flex;
   padding-top: 3%;
-
+  width: 30%;
 }
+
 /* rendering gets a bit randomic, ask why? */
 .mini-circle {
   width: 20px;
