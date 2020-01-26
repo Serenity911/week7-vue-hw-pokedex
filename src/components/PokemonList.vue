@@ -206,5 +206,7 @@ label {
 
 input {
   margin-top: 3%;
+  margin-left: 3%;
+
 }
 </style>
